@@ -81,10 +81,15 @@ See the bugs.
 
 ## Proposal
 
+See above.
+
 ## Deliverables
 
 
 ### Language specification changes
+
+Commentary on the specification is given in *italics*. Rationale is in **bold**.
+
 
 I propose to add a dedicated subsection, 10.11, to the section on classes.
 
