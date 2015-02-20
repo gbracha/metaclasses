@@ -18,9 +18,9 @@ Currently all classes in Dart have the same (meta)class: `Type`. `Type` has very
 I propose that the type object for a class *C* have implicitly defined instance methods corresponding to the static methods (including getters and setters) and constructors of *C*.
 For each static method *sm*, an instance method of the same name, with the same signature, is defined, which simply forwards the call to the static method *sm*. For each named constructor *k*, an instance method of the same name, with the same signature, is defined. This method returns the result of calling the constructor via **new**.
 
-Since the named constructors, static methods and instance methods cannot conflict, there is no risk of these synthetic methods conflicting with the existing instance methods of Type, which are all inherited from Object, or with each other. The anonymous constructor should be represented by a method called new; since **new** is a reserved word, no conflicts arise here either.
+Since the named constructors, static methods and instance methods cannot conflict, there is no risk of these synthetic methods conflicting with the existing instance methods of `Type`, which are all inherited from `Object`, or with each other. The anonymous constructor should be represented by a method called `new`; since **new** is a reserved word, no conflicts arise here either.
 
-This implies that every `Type` object is an instance of its own metaclass and that metaclasses do not mirror the inheritance hierarchy. Each metaclass is a direct subclass of `Type`. 
+The above implies that every `Type` object is an instance of its own metaclass and that metaclasses do not mirror the inheritance hierarchy. Each metaclass is a direct subclass of `Type`. 
 
 Since each instantiation of a generic has its own `Type` object, each one also has its own metaclass.
 
@@ -37,7 +37,7 @@ https://code.google.com/p/dart/issues/detail?id=10659
 
 We have also heard similar requests from internal customers at Google.
 
-The restrictions on the the use of `Typ`e values confuse people. It is very intuitive to be able to pass classes as parameters and use them as classes. A related point is the chronic desire to write `new T()` where *T* is a type parameter to a generic. See
+The restrictions on the the use of `Type` values confuse people. It is very intuitive to be able to pass classes as parameters and use them as classes. A related point is the chronic desire to write `new T()` where *T* is a type parameter to a generic. See
 
 https://code.google.com/p/dart/issues/detail?id=3633
 
@@ -45,6 +45,34 @@ https://code.google.com/p/dart/issues/detail?id=3633
 The current state of affairs leads to an ugly wart, where parentheses can change the meaning of an expression. Compare:
 
 `C.staticMethod()` as opposed to `(C).staticMethod()`. The former is a static method call, while the latter is an instance method call an instance of `Type`. Consequently, it fails. This sort of situation is confusing to users; understanding the difference is subtle. 
+
+###Pros
+
+* Simple
+
+* Eliminates some scenarios where users might otherwise need to use reflection.
+
+* Provides a more elegant solution than constructor tear-offs. 
+
+* No syntax changes are needed.
+
+* Addresses perceived needs, as evidenced by submitted bugs.
+
+
+
+
+ 
+###Cons
+
+* This does double the number of class objects in runtime as each declared class introduces its own metaclass. 
+
+* People may choose to use `C.new` instead of `new C()`, even when the latter is legal. In other words, there would be two ways of doing the same thing, which is regrettable.
+Also, some may object on grounds of style. This could be mitigated by defining *new e(args)* as *e.new(args)*. I would prefer not to go that route, but it may have some merit in that the obvious, naive thing just works.
+
+* Does not allow the use const constructors to create constant objects.
+
+* Does not give an easy way to refer to parameterized types as expressions, e.g., `Type t = List<T>;`. That is a separate issue.
+
 
 ## Examples
 
@@ -60,15 +88,15 @@ See the bugs.
 
 I propose to add a dedicated subsection, 10.11, to the section on classes.
 
-10.11 Metaclasses
+#### 10.11 Metaclasses
 
 At runtime, every class is associated with its own metaclass. 
 
-Here we speak of classes as runtime objects, distinct from class declarations. The distinction matters with respect to generics, where a single declaration introduces an entire family of runtime classes.  It is helpful to recall that every object has a particular class at runtime; this class might in fact be an instantiation of a generic class declaration, e.g., `List<int>;` in any event, each such class has its own unique metaclass.
+*Here we speak of classes as runtime objects, distinct from class declarations. The distinction matters with respect to generics, where a single declaration introduces an entire family of runtime classes.  It is helpful to recall that every object has a particular class at runtime; this class might in fact be an instantiation of a generic class declaration, e.g., `List<int>;` in any event, each such class has its own unique metaclass.*
 
 All metaclasses are direct subclasses of class `Type`.  
 
-In particular, the metaclass of class `Type` is a direct subclass of `Typ`e. A `Type` is an instance of one of its subclasses.
+*In particular, the metaclass of class `Type` is a direct subclass of `Type`. A `Type` is an instance of one of its subclasses.*
 
 Each metaclass has a single instance. Let *C* be a class:
 
