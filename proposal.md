@@ -81,6 +81,51 @@ Also, some may object on grounds of style. This could be mitigated by defining *
 ## Examples
 
 See the bugs.
+```
+class A {
+}
+
+class B<T> {
+  T GetBySmth() {
+    return T.new(); // could even be new T() if we went that far
+  }
+}
+
+void main() {
+  var b = new B<A>();
+  var x = b.GetBySmth();
+  assert(x is B);
+}
+```
+
+Now, in the case where we want to be type safe we could write
+
+```
+class B<T extends A.class> {
+  T GetBySmth() {
+    return T.new(); // could even be new T() if we went that far
+  }
+}
+
+```
+
+However, this is still less useful than it might seem, since even if *C* is a subtype of *A*, *C.class* is not a subtype of *A.class*. It should not be, since neither statics nor constructors are inherited. So to be more generally useful, one would need to define the desired interface that we need to use, say 
+
+```
+abstract class HasNullaryAnonymousConstructor {
+  static HasNullaryAnonymousConstructor();
+}
+```
+
+and then we'd need to somehow state that *A.class* implements *HasAnonymousConstructor*. Our options are to add some sort of implements clause for the class, such as
+
+```
+class A class implements HasAnonymousConstructor {
+}
+
+```
+
+or we could go with a structural approach instead.
 
 
 ## Proposal
@@ -300,8 +345,7 @@ In addition, we must update section 16.32 which specifies the static type of an 
 
 One word change here:
 
-* If *d* is a class, type alias or type parameter *T* the static type of *e* is ~~`Type`~~ *T.class*
-.
+* If *d* is a class, type alias or type parameter *T* the static type of *e* is ~~`Type`~~ *T.class*.
 
 ### A working implementation
 
