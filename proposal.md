@@ -127,6 +127,12 @@ class A class implements HasAnonymousConstructor {
 
 or we could go with a structural approach instead.
 
+As another example
+
+```
+
+```
+
 
 ## Proposal
 
@@ -363,4 +369,4 @@ TC52, the Ecma technical committee working on evolving the open [Dart standard][
 [language spec]: https://www.dartlang.org/docs/spec/
 [dart standard]: http://www.ecma-international.org/publications/standards/Ecma-408.htm
 [rfpp]: http://www.ecma-international.org/memento/TC52%20policy/Ecma%20Experimental%20TC52%20Royalty-Free%20Patent%20Policy.pdf
-[form]: http://www.ecma-international.org/memento/TC52%20policy/Contribution%20form%20to%20TC52%20Royalty%20Free%20Task%20Group%20as%20a%20non-member.pdf
+[external contributer form]: http://www.ecma-international.org/memento/TC52%20policy/Contribution%20form%20to%20TC52%20Royalty%20Free%20Task%20Group%20as%20a%20non-member.pdf
