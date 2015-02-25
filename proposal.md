@@ -300,7 +300,7 @@ In addition, we must update section 16.32 which specifies the static type of an 
 
 One word change here:
 
-* If *d* is a class, type alias or type parameter *T* the static type of *e* is ~~`Type`~~ $T.class$
+* If *d* is a class, type alias or type parameter *T* the static type of *e* is ~~`Type`~~ *T.class*
 .
 
 ### A working implementation
