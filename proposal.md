@@ -338,8 +338,8 @@ The value of the assignment expression is *o2* irrespective of whether setter lo
 
 In checked mode, it is a dynamic type error if *o2* is not **null** and the interface of the class of *o2* is not a subtype of the actual type of *e1.v*.
 
-Let *T* be the static type of *e1*. It is a static type warning if *T* does not have an accessible instance setter named *v =* unless ~~either:~~ *T* or a superinterface of *T* is annotated with an annotation denoting a constant identical to the constant `@proxy` defined in `dart:core`.~~Or
-* *T* is `Type`, *e1* is a constant type literal and the class corresponding to *e1* has a static setter named *v =*.~~
+Let *T* be the static type of *e1*. It is a static type warning if *T* does not have an accessible instance setter named *v =* unless ~~either:~~ *T* or a superinterface of *T* is annotated with an annotation denoting a constant identical to the constant `@proxy` defined in `dart:core`.~~Or~~
+~~* *T* is `Type`, *e1* is a constant type literal and the class corresponding to *e1* has a static setter named *v =*.~~
 
 It is a static type warning if the static type of *e2* may not be assigned to the static type of the formal parameter of the setter *v =*. The static type of the expression *e1.v = e2* is the static type of *e2*.
 
