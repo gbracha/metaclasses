@@ -259,7 +259,7 @@ Evaluation of a property extraction *i* of the form *e.m* proceeds as follows:
 
 First, the expression *e* is evaluated to an object *o*. Let *f* be the result of looking up (16.15.1) method (10.1) *m* in *o* with respect to the current library *L*. ~~If *o* is an instance of `Type` but *e* is not a constant type literal, then if *m* is a method that forwards (9.1) to a static method, method lookup fails.~~ If method lookup succeeds and *f* is a concrete method then *i* evaluates to the closurization of *o.m*.
 
-Otherwise, *i* is a getter invocation, and the getter function (10.2) *m* is looked up (16.15.2) in *o* with respect to*L*. ~~If *o* is an instance of `Type` but *e* is not a constant type literal, then if *m* is a getter that forwards to a static getter, getter lookup fails~~. Otherwise, the body of *m* is executed with this bound to *o*. The value of *i* is the result returned by the call to the getter function.
+Otherwise, *i* is a getter invocation, and the getter function (10.2) *m* is looked up (16.15.2) in *o* with respect to *L*. ~~If *o* is an instance of `Type` but *e* is not a constant type literal, then if *m* is a getter that forwards to a static getter, getter lookup fails~~. Otherwise, the body of *m* is executed with this bound to *o*. The value of *i* is the result returned by the call to the getter function.
 
 If the getter lookup has failed, then a new instance *im* of the predefined class `Invocation` is created, such that :
 
