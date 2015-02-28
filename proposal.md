@@ -284,12 +284,12 @@ Then the method `noSuchMethod()` is looked up in *o* and invoked with argument *
 and the result of the latter invocation is the result of evaluating *i*.
 
 It is a compile-time error if *m* is a member of class `Object` and *e* is ~~either~~ a
-prefix object (18.1)~~ or a constant type literal~~.
+prefix object (18.1)~~or a constant type literal~~.
 
 ~~*This precludes `int.toString` but not `(int).toString` because in the latter case, *e* is a parenthesized expression.*~~
 
-Let *T* be the static type of *e*. It is a static type warning if *T* does not have a method or getter named *m* unless ~~either:~~ *T* or a superinterface of *T* is annotated with an annotation denoting a constant identical to the constant `@proxy` defined in `dart:core`.~~ Or
-* *T* is `Type`, *e* is a constant type literal and the class corresponding to *e* has a static method or getter named *m*.~~
+Let *T* be the static type of *e*. It is a static type warning if *T* does not have a method or getter named *m* unless ~~either:~~ *T* or a superinterface of *T* is annotated with an annotation denoting a constant identical to the constant `@proxy` defined in `dart:core`.~~Or~~
+~~* *T* is `Type`, *e* is a constant type literal and the class corresponding to *e* has a static method or getter named *m*.~~
 
 If *i* is a getter invocation, the static type of *i* is:
 
