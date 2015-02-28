@@ -244,7 +244,7 @@ constant identical to the constant `@proxy` defined in `dart:core`. ~~Or
 a static getter named *m*.~~
 
 If *T.m* exists, it is a static type warning if the type *F* of *T.m* may not be assigned to a function type. If *T.m* does not exist, or if *F* is not a function type, the static type of *i* is dynamic; otherwise the static type of *i* is the declared return type of *F*.
-It is a compile-time error to invoke any of the methods of class `Object` on a prefix object (18.1) ~~or on a constant type literal that is immediately followed by the token ‘.’~~.
+It is a compile-time error to invoke any of the methods of class `Object` on a prefix object (18.1)  ~~or on a constant type literal that is immediately followed by the token ‘.’~~.
 
 
 
@@ -311,7 +311,7 @@ The section that changes is:
 Evaluation of an assignment of the form *e1.v = e2* proceeds as follows:
 
 The expression *e1* is evaluated to an object *o1*. Then, the expression *e2* is evaluated to an object *o2*. Then, the setter *v =* is looked up (16.15.2) in *o1* with
-respect to the current library.~~ If *o1* is an instance of `Type` but *e1* is not a constant type literal, then if `v =` is a setter that forwards (9.1) to a static setter, setter lookup fails. Otherwise, t~~The body of *v =* is executed with its formal parameter bound to *o2* and **this** bound to *o1*.
+respect to the current library.~~If *o1* is an instance of `Type` but *e1* is not a constant type literal, then if `v =` is a setter that forwards (9.1) to a static setter, setter lookup fails. Otherwise, t~~The body of *v =* is executed with its formal parameter bound to *o2* and **this** bound to *o1*.
 
 If the setter lookup has failed, then a new instance *im* of the predefined class `Invocation` is created, such that :
 
@@ -347,7 +347,7 @@ Evaluation of an assignment of the form *e1[e2] = e3* is equivalent to the evalu
 
 It is a static warning if an assignment of the form *v = e* occurs inside a top level or static function (be it function, method, getter, or setter) or variable initializer and there is neither a local variable declaration with name *v* nor setter declaration with name *v =* in the lexical scope enclosing the assignment.
 
-It is a compile-time error to invoke any of the setters of class `Object` on a prefix object (18.1)~~ or on a constant type literal that is immediately followed by the token ‘.’~~.
+It is a compile-time error to invoke any of the setters of class `Object` on a prefix object (18.1)~~or on a constant type literal that is immediately followed by the token ‘.’~~.
 
 
 In addition, we must update section 16.32 which specifies the static type of an identifier so that type literals are assigned the type of their metaclass.
