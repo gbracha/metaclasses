@@ -64,7 +64,7 @@ The current state of affairs leads to an ugly wart, where parentheses can change
  
 ###Cons
 
-* This does double the number of class objects in runtime as each declared class introduces its own metaclass. 
+* This does double the number of class objects in runtime as each declared class introduces its own metaclass. Perhaps these can be generated lazily.
 
 * People may choose to use `C.new` instead of `new C()`, even when the latter is legal. In other words, there would be two ways of doing the same thing, which is regrettable.
 Also, some may object on grounds of style. This could be mitigated by defining *new e(args)* as *e.new(args)*. I would prefer not to go that route, but it may have some merit in that the obvious, naive thing just works.
@@ -75,7 +75,7 @@ Also, some may object on grounds of style. This could be mitigated by defining *
 
 * No way to specify that a metaclass implements an interface.
 
-* May have negative impact on tree-shaking, leading to increased size of applications deployed via Javascript.
+* May have negative impact on tree-shaking, leading to increased size of applications deployed via Javascript. Initial studies indicate this effect is minor.
 
 
 ## Examples
@@ -101,7 +101,7 @@ void main() {
 Now, in the case where we want to be type safe we could write
 
 ```
-class B<T extends A.class> {
+class B<T extends A class extends A.class> {
   T GetBySmth() {
     return T.new(); // could even be new T() if we went that far
   }
@@ -125,13 +125,18 @@ class A class implements HasAnonymousConstructor {
 
 ```
 
-or we could go with a structural approach instead.
+or we could go with a structural approach instead. We could use this in
 
-As another example
+```
+class B<T extends A class extends HasNullaryAnonymousConstructor> {
+  T GetBySmth() {
+    return T.new(); // could even be new T() if we went that far
+  }
+}
 
 ```
 
-```
+
 
 
 ## Proposal
