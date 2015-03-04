@@ -73,8 +73,6 @@ Also, some may object on grounds of style. This could be mitigated by defining *
 
 * Does not give an easy way to refer to parameterized types as expressions, e.g., `Type t = List<T>;`. That is a separate issue.
 
-* No way to specify that a metaclass implements an interface.
-
 * May have negative impact on tree-shaking, leading to increased size of applications deployed via Javascript. Initial studies indicate this effect is minor.
 
 
@@ -183,8 +181,33 @@ It is a compile time error to extend a metaclass. All metaclasses are instances 
 
 **This circularity resolves what would otherwise be an infinite regress.**
 
+#####10.11.1 Metaclass Superinterfaces
 
-In addition, the restrictions disallowing access to such members must be removed from sections 16.17.1, 16.18, 16.19
+TBD
+
+
+#### 14 Generics
+
+A class declaration (10) or type alias (19.3.1) *G* may be *generic*, that is, *G* may have formal type parameters declared. A generic declaration induces a family of declarations, one for each set of actual type parameters provided in the program.
+
+```
+typeParameter:
+metadata identifier (extends type)? (class extends type)?
+;
+
+typeParameters:
+‘<’ typeParameter (‘,’ typeParameter)* ‘>’ ;
+```
+
+A type parameter *T* may be suffixed with an **extends** clause that specifies the upper bound for *T*. If no **extends** clause is present, the upper bound is `Object`.
+
+A type parameter *T* may be suffixed with an **extends class** clause that specifies the upper bound for *T.class*. If no **extends class** clause is present, the upper bound is `Type`.
+
+It is a static type warning if a type parameter is a supertype of its upper bound. It is a static type warning if a type parameter's class is a supertype of its upper bound. The bounds of type variables are a form of type annotation and have no effect on execution in production mode.
+
+**Rest of section 14 is unchanged.**
+
+In addition, the restrictions disallowing access to metaclass members must be removed from sections 16.17.1, 16.18, 16.19
 
 #### 16.17.1 Ordinary Invocation
 
