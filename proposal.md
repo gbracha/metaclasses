@@ -154,7 +154,7 @@ The declaration of a constructor named *m* in class *C* has the effect of adding
 
 *Because each generic instantiation has its own metaclass, type arguments are already included in `C`.*
 
-The declaration of an anonymous constructorin class *C* has the effect of adding an instance method with the same name and signature to the `Type` object for class *C* that, when run, returns the result of evaluating `new C` with the same arguments the instance method was called with.
+The declaration of an anonymous constructor in class *C* has the effect of adding an instance method with the same name and signature to the `Type` object for class *C* that, when run, returns the result of evaluating `new C` with the same arguments the instance method was called with.
 
 
 I propose to add a dedicated subsection, 10.11, to the section on classes.
